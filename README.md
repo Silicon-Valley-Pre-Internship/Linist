@@ -22,10 +22,6 @@
 
 
 
-
-<나중에 여기에 결과 화면들 예쁘게 넣으면 될듯....>
-
-
 ## ✔Application Feature✔
 
 ### Main Feature (PoC)
@@ -39,7 +35,10 @@
     2. only makes it(posts) visible to people I want to share using the Kakao Talk API
        cf. Everytime timetable sharing function
 
-
+## ✔UI/UX PROTOTYPE✔
+    XD prototype link : https://xd.adobe.com/view/135fad62-dd04-42ee-849d-7bde6faab676-460c/?fullscreen)
+    
+ 
 ## ✔Service Flow✔
 
     1.When a user launches a mobile app, it shows a login or membership page depending on whether he or she is registered or not.
@@ -91,5 +90,3 @@
 ## ✔Application Architecture✔
 <p align="center"><img src="https://user-images.githubusercontent.com/74306759/124227821-3a76f400-db46-11eb-8aee-c70057833fdd.png"></p>
 
-
-나중에 architecture설명약간이랑 위에 버전 고쳐야함!!!
