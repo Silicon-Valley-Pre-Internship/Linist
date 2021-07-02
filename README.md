@@ -1,4 +1,4 @@
 # TEAM_Linist
 
-## System Architecture
-![final system](https://user-images.githubusercontent.com/54856465/124207761-2ec50680-db21-11eb-8671-af6ad3abc29e.png)
+## Application Architecture
+![Architecture](https://user-images.githubusercontent.com/74306759/124227821-3a76f400-db46-11eb-8aee-c70057833fdd.png)
