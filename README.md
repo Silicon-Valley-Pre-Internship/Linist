@@ -8,6 +8,15 @@
  
  ⚡TEAM _ LINIST⚡
  
-    이름,,,
+    👩‍💻 KiHo Kim(Team Leader) : https://github.com/kiho0042
+    
+    🕵🏼‍♀️ Yujung Gil(Team Member) : https://github.com/fairyroad
+    
+    🙋 EunWoo Lee(Team Member) : https://github.com/rabbitew
+    
+    👩 Su-A Jang(Team Member) : https://github.com/su-aJ815
+    
+    🧙‍♂️ Yelim Jung(Team Member) : https://github.com/118dg
+
 ## 🏗️Application Architecture🏗️
 <p align="center"><img src="https://user-images.githubusercontent.com/74306759/124227821-3a76f400-db46-11eb-8aee-c70057833fdd.png"></p>
