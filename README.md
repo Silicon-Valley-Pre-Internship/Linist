@@ -25,7 +25,7 @@
 
 
 
-## ⛏Application Architecture⛏
+## ✔Application Architecture✔
 <p align="center"><img src="https://user-images.githubusercontent.com/74306759/124227821-3a76f400-db46-11eb-8aee-c70057833fdd.png"></p>
 
 ## ✔Application Feature✔
@@ -40,3 +40,28 @@
        cf. Instagram Feeds
     2. only makes it(posts) visible to people I want to share using the Kakao Talk API
        cf. Everytime timetable sharing function
+
+
+## ✔Tech Stack✔
+### Version Control
+    Git/Github
+
+### Front End
+    Hybrid App : React Native
+    Web Server : Nginx
+
+### Middleware
+    WSGI : Gunicorn
+
+### Back End
+    Framework : Flask
+    Image Processing : TensorFlow
+
+### DB
+    Client Data : MySQL
+    Line Drawing Data : mongoDB
+
+### Development Environment
+    Visual studio code, colab
+    docker
+    Google Cloud Platform
