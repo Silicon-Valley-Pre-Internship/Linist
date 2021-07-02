@@ -38,6 +38,25 @@
        cf. Everytime timetable sharing function
 
 
+## ✔Service Flow✔
+
+    1.When a user launches a mobile app, it shows a login or membership page depending on whether he or she is registered or not.
+    
+    2.After logging in, the page where you can upload photos first appears.
+    
+    3.This is to encourage users who first access the service to follow the process of obtaining line drawing images naturally.
+    
+    4.When a user uploads a picture, a black-and-white line image, which is named "Nukki," is created first based on image processing using tensorflow.
+    
+    5.Here, the user can select and apply the desired background image and can also color it.
+    
+    6.Completed copies that have been customized according to the user's intentions can be shared on SNS or stored in personal albums.
+    
+    7.Personal albums can be shared among allowed friends, and for this purpose, friend add-ons will be implemented.
+    
+    8.The album is expressed in the form of an "instagram feed" where you can scroll down to see posts and photos.
+
+
 ## ✔Tech Stack✔
 ### Version Control
     Git/Github
