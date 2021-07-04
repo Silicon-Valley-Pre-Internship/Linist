@@ -66,7 +66,7 @@
     Hybrid App : React Native
     Web Server : Nginx
 
-### Middleware
+### Gateway
     WSGI : Gunicorn
 
 ### Back End
