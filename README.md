@@ -62,14 +62,14 @@
 ### Version Control
     Git/Github
 
-### Front End
+### Frontend
     Hybrid App : React Native
     Web Server : Nginx
 
 ### Gateway
     WSGI : Gunicorn
 
-### Back End
+### Backend
     Framework : Flask
     Image Processing : TensorFlow
 
