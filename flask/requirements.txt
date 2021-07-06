@@ -1,0 +1,4 @@
+flask
+tensorflow == 2.5.0
+tensorflow-hub
+image
