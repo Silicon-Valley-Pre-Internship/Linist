@@ -103,7 +103,7 @@ def get_album():
 def conn_db(sql, sql_type):
     import pymysql
 
-    conn = pymysql.connect(host='', user='', password='', db='') # host(=서버주소), user, password, db 적어야함!!
+    conn = pymysql.connect(host='', user='', password='', db='') # addr, user, password, db
     curs = conn.cursor(pymysql.cursors.DictCursor)
     curs.execute(sql)
     if sql_type == "insert":
