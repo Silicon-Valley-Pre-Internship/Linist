@@ -14,7 +14,7 @@
     
     🕵🏼‍♀️ Yujung Gil(Team Member) : https://github.com/fairyroad
     
-    🙋 EunWoo Lee(Team Member) : https://github.com/rabbitew
+    🙋 EunWoo Lee(Team Member) : https://github.com/clairew99
     
     👩 Su-A Jang(Team Member) : https://github.com/su-aJ815
     
