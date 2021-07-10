@@ -1,0 +1,52 @@
+version: '3'
+
+services:
+  mysql_db:
+    image: mysql:latest
+    restart: always
+    networks:
+       - app-tier
+    volumes:
+       - ./mysql/db:/var/lib/mysql
+    ports:
+       - "3306:3306"
+    cap_add:
+       - SYS_NICE
+    environment:
+       - MYSQL_DATABASE=app
+       - MYSQL_USER=user
+       - MYSQL_PASSWORD=1234
+       - MYSQL_ROOT_PASSWORD=1234
+
+  flask_app:
+    build:
+      context: .
+      dockerfile: ./flask/Dockerfile
+    ports:
+       - "5000:5000"
+    links:
+       - mysql_db:mysql_db
+    depends_on:
+       - mysql_db
+    networks:
+       - app-tier
+    restart: always
+    volumes:
+       - ./flask/app:/app
+
+  nginx:
+    image: nginx:latest
+    ports:
+       - "80:80"
+       - "8000:8000"
+    volumes:
+       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    depends_on:
+       - flask_app
+    networks: 
+       - app-tier
+    restart: "on-failure"
+
+networks:
+    app-tier:
+      driver: bridge
