@@ -88,6 +88,5 @@
 
 
 ## ✔Application Architecture✔
-<p align="center"><img src="https://user-images.githubusercontent.com/74306759/125875601-4d5ffe87-fda9-4d7d-abf8-4681fabbf068.png"></p>
-
+<p align="center"><img src="https://user-images.githubusercontent.com/54856465/125875695-d8ab1afa-0545-4406-84e7-3ed087f6328d.png"></p>
 
