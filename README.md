@@ -74,12 +74,11 @@
     Image Processing : TensorFlow
 
 ### DB
-    Client Data : MySQL
-    Line Drawing Data : mongoDB
+    Client and line drawing Data : MySQL
 
 ### Development Environment
     Visual studio code, colab
-    docker
+    Docker
     Google Cloud Platform
     
 |         Frontend         |      Backend      |         etc          |
