@@ -4,65 +4,104 @@ import tensorflow as tf
 from PIL import Image, ImageDraw, ImageFont
 import PIL
 import numpy as np
-import io
+import io as IO
+import os
+from skimage import io
 import json
+import cv2
+import random
+import string
+import matplotlib.pyplot as plt
 
-hub_module = hub.load('https://tfhub.dev/google/magenta/arbitrary-image-stylization-v1-256/1')
+upload_folder = 'static'
 
-def load_img(path_to_img):
-    max_dim = 512
-    img = tf.io.read_file(path_to_img)
-    img = tf.image.decode_image(img, channels=3)
-    img = tf.image.convert_image_dtype(img, tf.float32)
+back_model = tf.keras.models.load_model('modelcombined_04_0.238711.h5')
 
-    shape = tf.cast(tf.shape(img)[:-1], tf.float32)
-    long_dim = max(shape)
-    scale = max_dim / long_dim
+def background_removal(imgpath, img):
+    if imgpath:
+        im = io.imread(imgpath)
+    else:
+        im = img.copy()
 
-    new_shape = tf.cast(shape * scale, tf.int32)
+    im = cv2.resize(im[:,:,0:3], (256,256))
+    img = np.array(im)/255
+    img = img.reshape((1,)+img.shape)
+    pred = back_model.predict(img)
 
-    img = tf.image.resize(img, new_shape)
-    img = img[tf.newaxis, :]
+    p = pred.copy()
+    p = p.reshape(p.shape[1:-1])
+
+    p[np.where(p>.25)] = 1
+    p[np.where(p<.25)] = 0
+
+    im[:,:,0] = im[:,:,0]*p 
+    im[:,:,0][np.where(p!=1)] = 255
+    im[:,:,1] = im[:,:,1]*p 
+    im[:,:,1][np.where(p!=1)] = 255
+    im[:,:,2] = im[:,:,2]*p
+    im[:,:,2][np.where(p!=1)] = 255
+
+    return im
+
+def load_img(image_location):
+    img = io.imread(image_location)
+    img = cv2.resize(img[:,:,0:3], (256,256), interpolation=cv2.INTER_AREA)
     return img
 
-def tensor_to_image(tensor):
-    tensor = tensor*255
-    tensor = np.array(tensor, dtype=np.uint8)
-    if np.ndim(tensor)>3:
-      assert tensor.shape[0] == 1
-      tensor = tensor[0]
-    return PIL.Image.fromarray(tensor)
+def save_img(img,image_name):
+    image_location = os.path.join(upload_folder, image_name)
+    cv2.imwrite(image_location, img)
+    return image_location
+
+def color_quantization(img, k):
+    data = np.float32(img).reshape((-1, 3))
+
+    criteria = (cv2.TERM_CRITERIA_EPS + cv2.TERM_CRITERIA_MAX_ITER, 20, 0.001)
+
+    ret, label, center = cv2.kmeans(data, k, None, criteria, 10, cv2.KMEANS_RANDOM_CENTERS)
+    center = np.uint8(center)
+    result = center[label.flatten()]
+    result = result.reshape(img.shape)
+    return result
 
 app = Flask(__name__)
 
 @app.route('/')
-#def index():
-#    return '내 추억의 연장선 On the Line'
-
-#@app.route('/send_image', methods = ['POST', 'GET'])
-#def send_image():
-#    if request.method == 'POST':
-#        if request.files.get('Image'):
-
 def index():
-    if 0==0:
-        if 0==0:
-            #image = request.files['myImage'].read()
-            image = tf.keras.utils.get_file('image.jpg','https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Lee_Jong-suk_March_2018.png/250px-Lee_Jong-suk_March_2018.png')
-            image = load_img(image)
+    return '내 추억의 연장선 On the Line'
 
-            style = tf.keras.utils.get_file('style.jpg','https://image.idus.com/image/files/794d59d229704961ab8f17d0ce36e95c_512.jpg')
-            style = load_img(style)
+@app.route('/img_trans', methods = ['POST', 'GET'])
+def img_trans():
+    if request.method == 'POST':
+        image_file = request.files['image']
+        if image_file:
+            image_location = os.path.join(upload_folder, image_file.filename)
+            image_file.save(image_location)
 
-            numpy_image = hub_module(tf.constant(image), tf.constant(style))[0]
-            numpy_image = tensor_to_image(numpy_image)
-            
-            byte_io = io.BytesIO()
-            numpy_image.save(byte_io,'jpeg')
-            byte_io.seek(0)
-            numpy_image.show()
+            new_image = load_img(image_location)
+            new_image_name = 'new_'+image_file.filename+'.jpg'
+            new_image_location = save_img(new_image, new_image_name)
 
-            return send_file(numpy_image, mimetype='image/jpeg')
+            back_removed = background_removal(imgpath=new_image_location, img=None)
+            back_removed_name = 'back_removed_'+image_file.filename
+            back_location = save_img(back_removed, back_removed_name)
+
+            img = cv2.imread(back_location)
+            gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+            gray = cv2.medianBlur(gray,5)
+            edges = cv2.adaptiveThreshold(gray, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 5, 5)
+
+            total_color = 9
+
+            img = color_quantization(img, total_color)
+
+            blurred = cv2.bilateralFilter(img, d=7, sigmaColor=250, sigmaSpace=250)
+            linist = cv2.bitwise_and(blurred, blurred, mask =edges)
+
+            linist_name = 'linist_' + image_file.filename +'.jpg'
+            linist_location = cv2.save_img(linist, linist_name)
+
+            return send_file(linist, mimetype='image/jpeg')
 
         else:
             return jsonify({'Result' : 'Fail'})
@@ -70,6 +109,49 @@ def index():
     else:
         return '내 추억의 연장선 On the Line'
 
+@app.route('/background', methods = ['POST', 'GET'])
+def background():
+    if request.method == 'POST':
+        if request.files.get('Image') and request.files.get('backImage'):
+            image = request.files['Image'].read()
+            image = Image.open(IO.ByteIO(image)).convert('RGB')
+
+            backImage = request.files['backImage'].read()
+            backImage = Image.open(IO.ByteIO(backImage)).convert('RGB')
+
+            image_location = os.path.join(upload_folder, image.filename)
+            image.save(image_location)
+
+            back_location = os.path.join(upload_folder, backImage.filename)
+            backImage.save(back_location)
+
+            new_image = load_img(image_location)
+            back_image = load_img(back_location)
+
+            mark = np.copy(image)
+
+            blue_threshold = 200
+            green_threshold = 200
+            red_threshold = 200
+            bgr_threshold = [blue_threshold, green_threshold, red_threshold]
+
+            thresholds = (image[:,:,0] < bgr_threshold[0]) | (image[:,:,1] < bgr_threshold[1]) | (image[:,:,2] < bgr_threshold[2])
+            mark[thresholds] = [0,0,0]
+
+            masked = cv2.bitwise_and(img2, mark)
+            masked2 = cv2.bitwise_and(image, 255-mark)
+
+            final = masked+masked2
+
+            final_name = 'back_' + image.filename +'.jpg'
+            linist_location = cv2.save_img(final, final_name)
+
+            return send_file(final, mimetype='image/jpeg')
+
+        else:
+            return jsonify({'Result' : 'Fail'})
+    else:
+        return '내 추억의 연장선 On the Line'
 
 if __name__ == '__main__':
     app.run(host ='0.0.0.0', debug=True, port ='333')
