@@ -1,4 +1,7 @@
 flask
-tensorflow == 2.5.0
+tensorflow
 tensorflow-hub
 image
+numpy
+scikit-image
+Opencv-python
