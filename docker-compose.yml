@@ -7,7 +7,7 @@ services:
     networks:
        - app-tier
     volumes:
-       - ./mysql/db:/var/lib/mysql
+       - .DB/mysql/db:/var/lib/mysql
     ports:
        - "3306:3306"
     cap_add:
@@ -33,6 +33,17 @@ services:
     restart: always
     volumes:
        - ./flask/app:/app
+
+  react-native:
+    build:
+      context: .
+      dockerfile: ./frontend/Dockerfile
+    ports:
+       - 8081:8081
+    volumes:
+       - ./frontend:/node
+    networks:
+       - app-tier
 
   nginx:
     image: nginx:latest
