@@ -1,17 +1,11 @@
-import tensorflow_hub as hub
 from flask import Flask, request, send_file, jsonify
 import tensorflow as tf
-from PIL import Image, ImageDraw, ImageFont
-import PIL
+from PIL import Image
 import numpy as np
 import io as IO
 import os
 from skimage import io
-import json
 import cv2
-import random
-import string
-import matplotlib.pyplot as plt
 
 upload_folder = 'static'
 
