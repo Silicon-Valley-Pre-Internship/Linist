@@ -49,7 +49,7 @@ Here's an example of the service.
   
   |👩‍💻 KiHo Kim|🕵🏼‍♀️ Yujung Gil|🚣‍♂️Yujin Yang|🙋 EunWoo Lee|👩 Su-A Jang|🧙‍♂️ Yelim Jung|
 |------|------|------|------|------|------|
-|@kiho0042|@fairyroad|@vikira|@clairew99|@su-aJ815|@118dg|
+|[@kiho0042](https://github.com/kiho0042)|@fairyroad|@vikira|@clairew99|@su-aJ815|@118dg|
   
  
     👩‍💻 KiHo Kim(Team Leader) : https://github.com/kiho0042
