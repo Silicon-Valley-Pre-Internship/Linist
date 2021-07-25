@@ -21,7 +21,7 @@ services:
   flask_app:
     build:
       context: .
-      dockerfile: ./flask/Dockerfile
+      dockerfile: ./backend/Dockerfile
     ports:
        - "5000:5000"
     links:
@@ -32,8 +32,8 @@ services:
        - app-tier
     restart: always
     volumes:
-       - ./flask/app:/app
-
+       - ./backend/app:/app
+    command: gunicorn -w 1 -b 0.0.0.0:5000 app:app
   react-native:
     build:
       context: .
@@ -54,6 +54,7 @@ services:
        - ./nginx/nginx.conf:/etc/nginx/nginx.conf
     depends_on:
        - flask_app
+       - react-native
     networks: 
        - app-tier
     restart: "on-failure"
