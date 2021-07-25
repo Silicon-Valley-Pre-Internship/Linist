@@ -13,10 +13,13 @@ Here's an example of the service.
 ![Feature](https://user-images.githubusercontent.com/85851785/126907094-b20045b9-760e-4906-add9-d01b4f0c2115.png)
 
 
-## ✔UI/UX PROTOTYPE✔
-    XD prototype link : https://xd.adobe.com/view/135fad62-dd04-42ee-849d-7bde6faab676-460c/?fullscreen)
+## Design Doc
+    https://www.notion.so/Design-Doc-fe427c8be69b4d4d8da287575667e28d
     
-
+    
+## Design Prototype
+    XD link : https://xd.adobe.com/view/135fad62-dd04-42ee-849d-7bde6faab676-460c/?fullscreen)
+    
 
 ## Tech Stack
     Version Control : Git/Github
