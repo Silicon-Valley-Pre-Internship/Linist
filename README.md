@@ -8,18 +8,15 @@ Here's an example of the service.
  
 
 
-## ✔Application Feature✔
+## Application Features
 
-### Main Feature (PoC)
-    1. Line drawing by removing the background of the picture.
-    2. Color by part (hair or clothing).
-    3. Change the background of the results to the desired background
-
-### Additional Feature
-    1. Create posts by account and manage them by date.
-       cf. Instagram Feeds
-    2. only makes it(posts) visible to people I want to share using the Kakao Talk API
-       cf. Everytime timetable sharing function
+|Main Feature (PoC)|Additional Feature|
+|------|------|
+|1. Line drawing by removing the background of the picture.
+2. Change the background of the results to the desired background|1. Create posts by account and manage them by date.
+   cf. Instagram Feeds
+2. only makes it(posts) visible to people I want to share using the Kakao Talk AP
+   cf. Everytime timetable sharing function|
 
 ## ✔UI/UX PROTOTYPE✔
     XD prototype link : https://xd.adobe.com/view/135fad62-dd04-42ee-849d-7bde6faab676-460c/?fullscreen)
