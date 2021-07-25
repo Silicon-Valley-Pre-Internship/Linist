@@ -14,10 +14,10 @@ CREATE TABLE users(
 DROP TABLE IF EXISTS image;
 CREATE TABLE image(
     id int(10) NOT NULL AUTO_INCREMENT,
-    user_id int(10) NOT NULL,
+    users_id int(10) NOT NULL,
     bucket_link varchar(50) NOT NULL,
     date date NOT NULL,
     PRIMARY KEY(id),
-    FOREIGN KEY(user_id) REFERENCES user(id) on update cascade on delete cascade
+    FOREIGN KEY(users_id) REFERENCES users(id) on update cascade on delete cascade
 );
 
