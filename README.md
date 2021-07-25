@@ -1,8 +1,10 @@
-# 📸ON THE LINE : An extension of my memory
+#ON THE LINE : An extension of my memory
 
-'On The Line📸' *is a mobile service that automates line drawing.*
+'On The Line📸' *is a mobile automation service changes image to line drawing. 
 
- You can convert photos into line drawing images in any style you want, and share them with your friends by posting them on your account.
+If you give photos to the service, you can print new photos turned into line drawing. Also you can keep the converted images in application and share it with friends allowed to approach. 
+
+Here's an example of the service.
  
  
  ## ⚡TEAM _ LINIST⚡
