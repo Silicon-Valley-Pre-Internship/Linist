@@ -43,9 +43,13 @@ Here's an example of the service.
 ![Architecture](https://user-images.githubusercontent.com/85851785/126907704-d746eaec-f982-47ac-8b33-80efea2e4209.png)
 
 
- ## ⚡TEAM _ LINIST⚡
+ ## TEAM _ LINIST
   
-  *On the Line started with LINIST's vision to provide an opportunity to make memories as easy and comfortable as anyone wants.*
+  2021 Silicon Valley Winter Online Internship Program - Team I 'LINIST'
+  
+  |👩‍💻 KiHo Kim|🕵🏼‍♀️ Yujung Gil|🚣‍♂️Yujin Yang|🙋 EunWoo Lee|👩 Su-A Jang|🧙‍♂️ Yelim Jung|
+|------|------|------|------|------|------|
+|@kiho0042|@fairyroad|@vikira|@clairew99|@su-aJ815|@118dg|
   
  
     👩‍💻 KiHo Kim(Team Leader) : https://github.com/kiho0042
