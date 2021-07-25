@@ -3,7 +3,7 @@ CREATE DATABASE linist_db DEFAULT CHARSET=utf8 COLLATE=UTF8_BIN;
 
 USE linist_db;
 DROP TABLE IF EXISTS users;
-CREATE TABLE user(
+CREATE TABLE users(
     id int(10) NOT NULL AUTO_INCREMENT,
     name varchar(25) NOT NULL,
     email varchar(40) NOT NULL,
