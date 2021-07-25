@@ -6,22 +6,6 @@ If you give photos to the service, you can print new photos turned into line dra
 
 Here's an example of the service.
  
- 
- ## ⚡TEAM _ LINIST⚡
-  
-  *On the Line started with LINIST's vision to provide an opportunity to make memories as easy and comfortable as anyone wants.*
-  
- 
-    👩‍💻 KiHo Kim(Team Leader) : https://github.com/kiho0042
-    
-    🕵🏼‍♀️ Yujung Gil(Team Member) : https://github.com/fairyroad
-    
-    🙋 EunWoo Lee(Team Member) : https://github.com/clairew99
-    
-    👩 Su-A Jang(Team Member) : https://github.com/su-aJ815
-    
-    🧙‍♂️ Yelim Jung(Team Member) : https://github.com/118dg
-
 
 
 ## ✔Application Feature✔
@@ -90,5 +74,21 @@ Here's an example of the service.
 
 ## ✔Application Architecture✔
 <p align="center"><img src="https://user-images.githubusercontent.com/74306759/126728093-b7f1dbb1-3a29-487f-827a-e3d51126150d.png"></p>
+
+ ## ⚡TEAM _ LINIST⚡
+  
+  *On the Line started with LINIST's vision to provide an opportunity to make memories as easy and comfortable as anyone wants.*
+  
+ 
+    👩‍💻 KiHo Kim(Team Leader) : https://github.com/kiho0042
+    
+    🕵🏼‍♀️ Yujung Gil(Team Member) : https://github.com/fairyroad
+    
+    🙋 EunWoo Lee(Team Member) : https://github.com/clairew99
+    
+    👩 Su-A Jang(Team Member) : https://github.com/su-aJ815
+    
+    🧙‍♂️ Yelim Jung(Team Member) : https://github.com/118dg
+
 
 
