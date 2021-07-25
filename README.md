@@ -9,7 +9,7 @@ Here's an example of the service.
 
 
 ## Application Features
-
+<img src="https://github.com/Silicon-Valley-Pre-Internship/Linist/issues/4#issue-952314464">
 
 
 ## ✔UI/UX PROTOTYPE✔
