@@ -45,7 +45,7 @@ Here's an example of the service.
 
  ## TEAM _ LINIST
   
-  2021 Silicon Valley Winter Online Internship Program - Team I 'LINIST'
+  2021 Silicon Valley Summer Online Internship Program - Team I 'LINIST'
   
   |👩‍💻 KiHo Kim|🕵🏼‍♀️ Yujung Gil|🚣‍♂️Yujin Yang|🙋 EunWoo Lee|👩 Su-A Jang|🧙‍♂️ Yelim Jung|
 |------|------|------|------|------|------|
