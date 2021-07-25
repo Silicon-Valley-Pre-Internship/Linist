@@ -10,7 +10,7 @@ Here's an example of the service.
 
 
 ## Application Features
-![Feature](https://user-images.githubusercontent.com/85851785/126907094-b20045b9-760e-4906-add9-d01b4f0c2115.png)
+![Feature](https://user-images.githubusercontent.com/85851785/126907695-69653e61-2bc7-4641-b2ca-75c25993b656.png)
 
 
 ## Design Doc
@@ -40,7 +40,7 @@ Here's an example of the service.
 
 
 ### Application Architecture
-<p align="center"><img src="https://user-images.githubusercontent.com/74306759/126728093-b7f1dbb1-3a29-487f-827a-e3d51126150d.png"></p>
+![Architecture](https://user-images.githubusercontent.com/85851785/126907704-d746eaec-f982-47ac-8b33-80efea2e4209.png)
 
 
  ## ⚡TEAM _ LINIST⚡
