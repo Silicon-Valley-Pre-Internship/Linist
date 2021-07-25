@@ -138,7 +138,7 @@ def background():
             final = masked+masked2
 
             final_name = 'back_' + image.filename +'.jpg'
-            linist_location = cv2.save_img(final, final_name)
+            linist_location = save_img(final, final_name)
 
             return send_file(final, mimetype='image/jpeg')
 
