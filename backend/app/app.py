@@ -7,9 +7,10 @@ from skimage import io
 import cv2
 from werkzeug.utils import secure_filename
 
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 upload_folder = './static/'
 
-back_model = tf.keras.models.load_model('modelcombined_04_0.238711.h5')
+back_model = tf.keras.models.load_model('./modelcombined_04_0.238711.h5')
 
 
 def background_removal(imgpath, img):
