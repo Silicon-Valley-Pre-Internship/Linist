@@ -11,9 +11,6 @@ import background_remove.process as process
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 upload_folder = './static/'
 
-#def process(input_path, model_name="u2net",
-#            preprocessing_method_name="bbd-fastrcnn", postprocessing_method_name="rtb-bnb"):
-
 def load_img(image_location):
     img = io.imread(image_location)
     img = cv2.resize(img[:, :, 0:3], (256, 256), interpolation=cv2.INTER_AREA)
@@ -78,6 +75,8 @@ def img_trans():
 
             linist_name = upload_folder + 'linist_test.png'
             cv2.imwrite(linist_name,linist)
+            linist = process.process(linist_name)
+            linist.save(linist_name)
 
             return send_file(linist, mimetype='image/jpeg')
 
@@ -95,37 +94,35 @@ def background():
             image = request.files['image']
             backImage = request.files['backImage']
 
+            image_name = secure_filename(image.filename)
             image_location = os.path.join(
-                upload_folder + secure_filename(image.filename))
+                upload_folder + image_name)
             image.save(image_location)
-            image_name = image.filename
-            image = load_img(image_location)
+            image = Image.open(image_location)
+            image.convert("RGBA")
+            imsize = image.size
 
             back_location = os.path.join(
                 upload_folder + secure_filename(backImage.filename))
             backImage.save(back_location)
-            backImage = load_img(back_location)
+            backImage = Image.open(back_location)
+            backImage = backImage.resize(imsize)
 
-            mark = np.copy(image)
+            datas = image.getdata()
+            datas_back = backImage.getdata()
 
-            blue_threshold = 200
-            green_threshold = 200
-            red_threshold = 200
-            bgr_threshold = [blue_threshold, green_threshold, red_threshold]
+            finalData = list()
 
-            thresholds = (image[:, :, 0] < bgr_threshold[0]) | (
-                image[:, :, 1] < bgr_threshold[1]) | (image[:, :, 2] < bgr_threshold[2])
-            mark[thresholds] = [0, 0, 0]
+            for i in range(len(datas)):
+                if datas[i][3] == 0:
+                    finalData.append(datas_back[i])
+                else:
+                    finalData.append(datas[i])
 
-            masked = cv2.bitwise_and(backImage, mark)
-            masked2 = cv2.bitwise_and(image, 255-mark)
+            image.putdata(finalData)
+            image.save(upload_folder + 'final.png')
 
-            final = masked+masked2
-
-            final_name = 'back_' + image_name + '.jpg'
-            linist_location = save_img(final, final_name)
-
-            return send_file(final, mimetype='image/jpeg')
+            return send_file(image, mimetype='image/jpeg')
 
         else:
             return jsonify({'Result': 'Fail'})
