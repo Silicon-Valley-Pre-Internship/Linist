@@ -28,28 +28,33 @@ def __work_mode__(path: str):
 def process(input_path, model_name="u2net"):
 
     if input_path is None:
-        raise Exception("Bad parameters! Please specify input path and output path.")
+        raise Exception(
+            "Bad parameters! Please specify input path and output path.")
 
     model = U2NET(model_name)  # Load model
-    preprocessing_method = BoundingBoxDetectionFastRcnn()
-    postprocessing_method = RemovingTooTransparentBordersHardAndBlurringHardBorders()
     wmode = __work_mode__(input_path)  # Get work mode
     if wmode == "file":  # File work mode
-        image = model.process_image(input_path, preprocessing_method, postprocessing_method)
+        image = model.process_image(
+            input_path)
         return image
     elif wmode == "dir":  # Dir work mode
         # Start process
         files = os.listdir(input_path)
         for file in tqdm.tqdm(files, ascii=True, desc='Remove Background', unit='image'):
             file_path = os.path.join(input_path, file)
-            image = model.process_image(file_path, preprocessing_method, postprocessing_method)
+            image = model.process_image(
+                file_path)
     else:
-        raise Exception("Bad input parameter! Please indicate the correct path to the file or folder.")
+        raise Exception(
+            "Bad input parameter! Please indicate the correct path to the file or folder.")
+
 
 logger = logging.getLogger(__name__)
 
+
 class U2NET:
     """U^2-Net model interface"""
+
     def __init__(self, name="u2net"):
         self.Variable = Variable
         self.torch = torch
@@ -57,22 +62,25 @@ class U2NET:
         self.U2NETP_DEEP = U2NETP_DEEP
 
         if name == 'u2net':  # Load model
-            logger.debug("Loading a U2NET model (176.6 mb) with better quality but slower processing.")
+            logger.debug(
+                "Loading a U2NET model (176.6 mb) with better quality but slower processing.")
             net = self.U2NET_DEEP()
         elif name == 'u2netp':
-            logger.debug("Loading a U2NETp model (4 mb) with lower quality but fast processing.")
+            logger.debug(
+                "Loading a U2NETp model (4 mb) with lower quality but fast processing.")
             net = self.U2NETP_DEEP()
         else:
             raise Exception("Unknown u2net model!")
         try:
-            path = '' # model path
+            path = ''  # model path
             if self.torch.cuda.is_available():
                 net.load_state_dict(self.torch.load(path))
                 net.cuda()
             else:
                 net.load_state_dict(self.torch.load(path, map_location="cpu"))
         except FileNotFoundError:
-            raise FileNotFoundError("No pre-trained model found! Run setup.sh or setup.bat to download it!")
+            raise FileNotFoundError(
+                "No pre-trained model found! Run setup.sh or setup.bat to download it!")
         net.eval()
         self.__net__ = net  # Define model
 
@@ -86,7 +94,8 @@ class U2NET:
             # then this algorithm should immediately remove the background
             image = preprocessing.run(self, image, org_image)
         else:
-            image = self.__get_output__(image, org_image)  # If this is not, then just remove the background
+            # If this is not, then just remove the background
+            image = self.__get_output__(image, org_image)
         if postprocessing:  # If a postprocessing algorithm is specified, we send it an image without a background
             image = postprocessing.run(self, image, org_image)
         return image
@@ -111,7 +120,8 @@ class U2NET:
         logger.debug("Apply mask to image")
         empty = Image.new("RGBA", org_image.size)
         image = Image.composite(org_image, empty, mask)
-        logger.debug("Finished! Time spent: {}".format(time.time() - start_time))
+        logger.debug("Finished! Time spent: {}".format(
+            time.time() - start_time))
         return image
 
     def __load_image__(self, data):
@@ -120,14 +130,17 @@ class U2NET:
             try:
                 image = io.imread(data)  # Load image if there is a path
             except IOError:
-                logger.error('Cannot retrieve image. Please check file: ' + data)
+                logger.error(
+                    'Cannot retrieve image. Please check file: ' + data)
                 return False, False
             pil_image = Image.fromarray(image)
         else:
             image = np.array(data)  # Convert PIL image to numpy arr
             pil_image = data
-        image = transform.resize(image, (image_size, image_size), mode='constant')  # Resize image
-        image = self.__ndrarray2tensor__(image)  # Convert image from numpy arr to tensor
+        image = transform.resize(
+            image, (image_size, image_size), mode='constant')  # Resize image
+        # Convert image from numpy arr to tensor
+        image = self.__ndrarray2tensor__(image)
         return image, pil_image
 
     def __ndrarray2tensor__(self, image: np.ndarray):
@@ -161,8 +174,10 @@ class U2NET:
         mask = mask.resize(image_size, resample=Image.BILINEAR)
         return mask
 
+
 def method_detect(method: str):
     return RemovingTooTransparentBordersHardAndBlurringHardBorders()
+
 
 class RemovingTooTransparentBordersHardAndBlurringHardBorders:
 
@@ -194,10 +209,12 @@ class RemovingTooTransparentBordersHardAndBlurringHardBorders:
         # extract alpha channel
         a = image[:, :, 3]
         # blur alpha channel
-        ab = self.cv2.GaussianBlur(a, (0, 0), sigmaX=2, sigmaY=2, borderType=self.cv2.BORDER_DEFAULT)
+        ab = self.cv2.GaussianBlur(
+            a, (0, 0), sigmaX=2, sigmaY=2, borderType=self.cv2.BORDER_DEFAULT)
         # stretch so that 255 -> 255 and 127.5 -> 0
         # noinspection PyUnresolvedReferences
-        aa = self.skimage.exposure.rescale_intensity(ab, in_range=(140, 255), out_range=(0, 255))
+        aa = self.skimage.exposure.rescale_intensity(
+            ab, in_range=(140, 255), out_range=(0, 255))
         # replace alpha channel in input with new alpha channel
         out = image.copy()
         out[:, :, 3] = aa
@@ -217,7 +234,8 @@ class RemovingTooTransparentBordersHardAndBlurringHardBorders:
         return Image.fromarray(mask)
 
     def run(self, _, image, orig_image):
-        mask = self.__remove_too_transparent_borders__(self.__extact_alpha_channel__(image))
+        mask = self.__remove_too_transparent_borders__(
+            self.__extact_alpha_channel__(image))
         empty = Image.new("RGBA", orig_image.size)
         image = Image.composite(orig_image, empty, mask)
         image = self.__blur_edges__(image)
@@ -260,14 +278,16 @@ class BoundingBoxDetectionFastRcnn:
         return border
 
     def run(self, model, prep_image, orig_image):
-        _, resized_image, results = self.__fast_rcnn__.process_image(orig_image)
+        _, resized_image, results = self.__fast_rcnn__.process_image(
+            orig_image)
 
         classes = self.__fast_rcnn__.class_names
         bboxes = results['bboxes']
         ids = results['ids']
         scores = results['scores']
 
-        object_num = len(bboxes)  # We get the number of all objects in the photo
+        # We get the number of all objects in the photo
+        object_num = len(bboxes)
 
         if object_num < 1:  # If there are no objects, or they are not found,
             # we try to remove the background using standard tools
@@ -291,7 +311,8 @@ class BoundingBoxDetectionFastRcnn:
                 object_label = classes[object_cls_id]
             else:
                 object_label = str(object_cls_id) if object_cls_id >= 0 else ''
-            object_border = self.__orig_object_border__(bbox, orig_image, resized_image)
+            object_border = self.__orig_object_border__(
+                bbox, orig_image, resized_image)
             objects.append([object_label, object_border])
         if objects:
             if len(objects) == 1:
@@ -337,20 +358,23 @@ class FastRcnn:
                 data_input = data_input.convert("RGB")
                 image = np.array(data_input)  # Convert PIL image to numpy arr
             except IOError:
-                logger.error('Cannot retrieve image. Please check file: ' + data_input)
+                logger.error(
+                    'Cannot retrieve image. Please check file: ' + data_input)
                 return False, False
         else:
             # Fix https://github.com/OPHoperHPO/image-background-remove-tool/issues/19
             data_input = data_input.convert("RGB")
             image = np.array(data_input)  # Convert PIL image to numpy arr
-        x, resized_image = self.data.transforms.presets.rcnn.transform_test(self.nd.array(image))
+        x, resized_image = self.data.transforms.presets.rcnn.transform_test(
+            self.nd.array(image))
         return x, image, resized_image
 
     def process_image(self, image):
         start_time = time.time()  # Time counter
         x, image, resized_image = self.__load_image__(image)
         ids, scores, bboxes = [xx[0].asnumpy() for xx in self.__net__(x)]
-        logger.debug("Finished! Time spent: {}".format(time.time() - start_time))
+        logger.debug("Finished! Time spent: {}".format(
+            time.time() - start_time))
         return image, resized_image, {"ids": ids, "scores": scores, "bboxes": bboxes}
 
 
@@ -376,29 +400,36 @@ class MaskRcnn:
                 data_input = data_input.convert("RGB")
                 image = np.array(data_input)  # Convert PIL image to numpy arr
             except IOError:
-                logger.error('Cannot retrieve image. Please check file: ' + data_input)
+                logger.error(
+                    'Cannot retrieve image. Please check file: ' + data_input)
                 return False, False
         else:
             # Fix https://github.com/OPHoperHPO/image-background-remove-tool/issues/19
             data_input = data_input.convert("RGB")
             image = np.array(data_input)  # Convert PIL image to numpy arr
-        x, resized_image = self.data.transforms.presets.rcnn.transform_test(self.nd.array(image))
+        x, resized_image = self.data.transforms.presets.rcnn.transform_test(
+            self.nd.array(image))
         return x, image, resized_image
 
     def process_image(self, image):
         start_time = time.time()  # Time counter
         x, image, resized_image = self.__load_image__(image)
-        ids, scores, bboxes, masks = [xx[0].asnumpy() for xx in self.__net__(x)]
-        masks, _ = self.utils.viz.expand_mask(masks, bboxes, (image.shape[1], image.shape[0]), scores)
-        logger.debug("Finished! Time spent: {}".format(time.time() - start_time))
+        ids, scores, bboxes, masks = [xx[0].asnumpy()
+                                      for xx in self.__net__(x)]
+        masks, _ = self.utils.viz.expand_mask(
+            masks, bboxes, (image.shape[1], image.shape[0]), scores)
+        logger.debug("Finished! Time spent: {}".format(
+            time.time() - start_time))
         return image, resized_image, {"ids": ids, "scores": scores, "bboxes": bboxes,
                                       "masks": masks}
+
 
 class REBNCONV(nn.Module):
     def __init__(self, in_ch=3, out_ch=3, dirate=1):
         super(REBNCONV, self).__init__()
 
-        self.conv_s1 = nn.Conv2d(in_ch, out_ch, 3, padding=1 * dirate, dilation=1 * dirate)
+        self.conv_s1 = nn.Conv2d(
+            in_ch, out_ch, 3, padding=1 * dirate, dilation=1 * dirate)
         self.bn_s1 = nn.BatchNorm2d(out_ch)
         self.relu_s1 = nn.ReLU(inplace=True)
 
@@ -411,7 +442,8 @@ class REBNCONV(nn.Module):
 
 # upsample tensor 'src' to have the same spatial size with tensor 'tar'
 def _upsample_like(src, tar):
-    src = F.interpolate(src, size=tar.shape[2:], mode='bilinear', align_corners=False)
+    src = F.interpolate(
+        src, size=tar.shape[2:], mode='bilinear', align_corners=False)
 
     return src
 

@@ -12,12 +12,14 @@ from google.cloud import storage
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 upload_folder = './static/'
 
+
 def upload_blob(source_file_name, blob_name):
     storage_client = storage.Client()
     bucket = storage_client.bucket('linist_1')
     blob = bucket.blob(blob_name)
 
     blob.upload_from_filename(source_file_name)
+
 
 def load_img(image_location):
     img = io.imread(image_location)
@@ -31,10 +33,12 @@ def save_img(img, image_name):
     cv2.imwrite(image_location, img)
     return image_location
 
+
 def removeAllFile(filePath):
     if os.path.exists(filePath):
         for file in os.scandir(filePath):
             os.remove(file.path)
+
 
 def color_quantization(img, k):
     data = np.float32(img).reshape((-1, 3))
@@ -65,13 +69,13 @@ def img_trans():
             image_location = os.path.join(
                 upload_folder + secure_filename(image_file.filename))
             image_file.save(image_location)
-            upload_blob(image_location, 'image.png')
+            upload_blob(image_location, 'image3.png')
 
             back_removed = process.process(image_location)
-            back_removed_name = 'back_removed_'+ 'test.png'
+            back_removed_name = 'back_removed_' + 'test.png'
             back_location = upload_folder + back_removed_name
             back_removed.save(back_location)
-            upload_blob(back_location, 'back_removed.png')
+            upload_blob(back_location, 'back_removed3.png')
 
             img = cv2.imread(back_location)
             gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -88,12 +92,12 @@ def img_trans():
             linist = cv2.bitwise_and(blurred, blurred, mask=edges)
 
             linist_name = upload_folder + 'linist_test.png'
-            cv2.imwrite(linist_name,linist)
+            cv2.imwrite(linist_name, linist)
             linist = process.process(linist_name)
             linist.save(linist_name)
-            upload_blob(linist_name, 'linist.png')
+            upload_blob(linist_name, 'linist3.png')
 
-            #linist_url = 'https://storage.googleapis.com/linist_1/' + 파일명 <- url 이런 식으로 형성됨.
+            # linist_url = 'https://storage.googleapis.com/linist_1/' + 파일명 <- url 이런 식으로 형성됨.
             removeAllFile(upload_folder)
 
             return send_file(linist, mimetype='image/jpeg')
