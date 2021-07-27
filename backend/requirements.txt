@@ -1,6 +1,5 @@
 flask
 image
-scikit-image
 opencv-python
 gunicorn
 pywebview==3.2
