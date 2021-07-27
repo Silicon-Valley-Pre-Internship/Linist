@@ -47,7 +47,7 @@ Here's an example of the service.
   
   2021 Silicon Valley Summer Online Internship Program - Team I 'LINIST'
   
-  |👩‍💻 KiHo Kim|🕵🏼‍♀️ Yujung Gil|🚣‍♂️Yujin Yang|🙋 EunWoo Lee|👩 Su-A Jang|🧙‍♂️ Yelim Jung|
+  |👩‍💻 KiHo Kim|🕵🏼‍♀️ Yujung Gil|🚣‍♂️Yoojin Yang|🙋 EunWoo Lee|👩 Su-A Jang|🧙‍♂️ Yelim Jung|
 |------|------|------|------|------|------|
 |[@kiho0042](https://github.com/kiho0042)|[@fairyroad](https://github.com/fairyroad)|[@vikira](https://github.com/vikira)|[@clairew99](https://github.com/clairew99)|[@su-aJ815](https://github.com/su-aJ815)|[@118dg](https://github.com/118dg)|
  
