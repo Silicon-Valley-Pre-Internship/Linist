@@ -6,39 +6,13 @@ import os
 from skimage import io
 import cv2
 from werkzeug.utils import secure_filename
+import background_remove.process as process
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 upload_folder = './static/'
 
-back_model = tf.keras.models.load_model('./modelcombined_04_0.238711.h5')
-
-
-def background_removal(imgpath, img):
-    if imgpath:
-        im = io.imread(imgpath)
-    else:
-        im = img.copy()
-
-    im = cv2.resize(im[:, :, 0:3], (256, 256))
-    img = np.array(im)/255
-    img = img.reshape((1,)+img.shape)
-    pred = back_model.predict(img)
-
-    p = pred.copy()
-    p = p.reshape(p.shape[1:-1])
-
-    p[np.where(p > .25)] = 1
-    p[np.where(p < .25)] = 0
-
-    im[:, :, 0] = im[:, :, 0]*p
-    im[:, :, 0][np.where(p != 1)] = 255
-    im[:, :, 1] = im[:, :, 1]*p
-    im[:, :, 1][np.where(p != 1)] = 255
-    im[:, :, 2] = im[:, :, 2]*p
-    im[:, :, 2][np.where(p != 1)] = 255
-
-    return im
-
+#def process(input_path, model_name="u2net",
+#            preprocessing_method_name="bbd-fastrcnn", postprocessing_method_name="rtb-bnb"):
 
 def load_img(image_location):
     img = io.imread(image_location)
@@ -83,14 +57,10 @@ def img_trans():
                 upload_folder + secure_filename(image_file.filename))
             image_file.save(image_location)
 
-            new_image = load_img(image_location)
-            new_image_name = 'new_'+image_file.filename+'.jpg'
-            new_image_location = save_img(new_image, new_image_name)
-
-            back_removed = background_removal(
-                imgpath=new_image_location, img=None)
-            back_removed_name = 'back_removed_'+image_file.filename
-            back_location = save_img(back_removed, back_removed_name)
+            back_removed = process.process(image_location)
+            back_removed_name = 'back_removed_'+ 'test.png'
+            back_location = upload_folder + back_removed_name
+            back_removed.save(back_location)
 
             img = cv2.imread(back_location)
             gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -106,8 +76,8 @@ def img_trans():
                 img, d=7, sigmaColor=250, sigmaSpace=250)
             linist = cv2.bitwise_and(blurred, blurred, mask=edges)
 
-            linist_name = 'linist_' + image_file.filename + '.jpg'
-            linist_location = save_img(linist, linist_name)
+            linist_name = upload_folder + 'linist_test.png'
+            cv2.imwrite(linist_name,linist)
 
             return send_file(linist, mimetype='image/jpeg')
 
