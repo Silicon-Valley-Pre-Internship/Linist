@@ -65,7 +65,7 @@ class U2NET:
         else:
             raise Exception("Unknown u2net model!")
         try:
-            path = '/Users/gimgiho/Desktop/Linist/backend/app/u2net.pth' # model path
+            path = '' # model path
             if self.torch.cuda.is_available():
                 net.load_state_dict(self.torch.load(path))
                 net.cuda()
