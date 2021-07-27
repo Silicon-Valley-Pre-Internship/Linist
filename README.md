@@ -1,8 +1,8 @@
 # ON THE LINE : An extension of my memory
 
-'On The Line📸' is a mobile automation service changes image to line drawing. 
+'On The Line📸' is a mobile automation service that changes an image to the line drawing. 
 
-If you give photos to the service, you can print new photos turned into line drawing. Also you can keep the converted images in application and share it with friends allowed to approach. 
+If you give photos to the service, you can print new photos turned into line drawing. Also you can keep the converted images in the application and share it with friends allowed to approach. 
 
 Here's an example of the service.
  
