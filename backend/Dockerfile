@@ -1,6 +1,6 @@
 # using base image
 # Start FROM Nvidia PyTorch image https://ngc.nvidia.com/catalog/containers/nvidia:pytorch
-FROM nvcr.io/nvidia/pytorch:20.10-py3
+FROM pytorch/pytorch:1.9.0-cuda10.2-cudnn7-runtime
 
 # Install linux packages
 RUN apt update && apt install -y screen
@@ -8,6 +8,7 @@ RUN apt update && apt install -y screen
 # Install python dependencies
 RUN pip install --upgrade pip
 RUN apt-get -y install libgl1-mesa-glx
+RUN apt-get update && apt-get -y install libglib2.0-0
 
 # copy requirements.txt to current folder
 COPY requirements.txt .
@@ -25,9 +26,10 @@ RUN mkdir -p /usr/src/app
 COPY . /usr/src/app
 WORKDIR /usr/src/app/app
 
-# exposing port 8000 on container
+ENV GOOGLE_APPLICATION_CREDENTIALS="/usr/src/app/app/linist-4cc646b68cad.json"
+
 EXPOSE 333
 
 # serving flask backend through uWSGI server
 
-#CMD [ "python", "app.py" ]
+CMD [ "python", "app.py" ]
