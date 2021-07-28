@@ -16,3 +16,4 @@ scikit_image
 Pillow
 mxnet
 google-cloud-storage
+flask-sqlalchemy
