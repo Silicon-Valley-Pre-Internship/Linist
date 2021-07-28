@@ -22,7 +22,6 @@ Here's an example of the service.
     
 
 ## Tech Stack
-    Version Control : Git/Github
     Frontend : React Native
     WSGI : Gunicorn
     Backend : Flask
