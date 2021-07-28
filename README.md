@@ -49,5 +49,5 @@ Here's an example of the service.
   
   |👩‍💻 KiHo Kim|🕵🏼‍♀️ Yujung Gil|🚣‍♂️Yoojin Yang|🙋 EunWoo Lee|👩 Su-A Jang|🧙‍♂️ Yelim Jung|
 |------|------|------|------|------|------|
-|*[@kiho0042](https://github.com/kiho0042)*|[@fairyroad](https://github.com/fairyroad)|[@vikira](https://github.com/vikira)|[@clairew99](https://github.com/clairew99)|[@su-aJ815](https://github.com/su-aJ815)|[@118dg](https://github.com/118dg)|
+|**[@kiho0042](https://github.com/kiho0042)|[@fairyroad](https://github.com/fairyroad)|[@vikira](https://github.com/vikira)|[@clairew99](https://github.com/clairew99)|[@su-aJ815](https://github.com/su-aJ815)|[@118dg](https://github.com/118dg)|
  
