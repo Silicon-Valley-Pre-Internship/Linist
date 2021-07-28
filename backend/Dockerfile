@@ -30,4 +30,4 @@ EXPOSE 333
 
 # serving flask backend through uWSGI server
 
-CMD [ "python", "app.py" ]
+#CMD [ "python", "app.py" ]
