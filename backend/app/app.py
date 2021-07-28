@@ -102,10 +102,10 @@ def img_trans():
             linist.save(linist_name)
             upload_blob(linist_name, timedata + 'linist.png')
 
-            # linist_url = 'https://storage.googleapis.com/linist_1/' + 파일명 <- url 이런 식으로 형성됨.
+            linist_url = 'https://storage.googleapis.com/linist_1/' + timedata + 'linist.png'
             removeAllFile(upload_folder)
 
-            return send_file(linist, mimetype='image/jpeg')
+            return linist_url
 
         else:
             return jsonify({'Result': 'Fail'})
