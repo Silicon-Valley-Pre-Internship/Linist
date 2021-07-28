@@ -152,9 +152,11 @@ def background():
 
             upload_blob(upload_folder + 'final.png', timedata + 'final.png')
 
+            final_url = 'https://storage.googleapis.com/linist_1/' + timedata + 'final.png'
+
             removeAllFile(upload_folder)
 
-            return send_file(image, mimetype='image/jpeg')
+            return final_url
 
         else:
             return jsonify({'Result': 'Fail'})
