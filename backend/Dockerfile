@@ -1,21 +1,33 @@
-FROM ubuntu:20.04
+# using base image
+# Start FROM Nvidia PyTorch image https://ngc.nvidia.com/catalog/containers/nvidia:pytorch
+FROM nvcr.io/nvidia/pytorch:20.10-py3
 
-WORKDIR /app
+# Install linux packages
+RUN apt update && apt install -y screen
 
-RUN apt-get update -y && \
-  apt-get install -y python3-pip python3-dev \
-  build-essential libssl-dev libffi-dev python3-setuptools
+# Install python dependencies
+RUN pip install --upgrade pip
+RUN apt-get -y install libgl1-mesa-glx
 
+# copy requirements.txt to current folder
+COPY requirements.txt .
 
-ENV FLASK_APP=app.py
-ENV FLASK_RUN_HOST=0.0.0.0
+# installing flask requirements
+RUN pip install -r requirements.txt
 
-COPY ./backend/requirements.txt requirements.txt
-RUN pip3 install -r requirements.txt
+RUN pip install gsutil
 
+# Create working directory
+# setting working dir inside container
+RUN mkdir -p /usr/src/app
 
-EXPOSE 5000
-#COPY . .
+# Copy contents
+COPY . /usr/src/app
+WORKDIR /usr/src/app/app
 
-# CMD gunicorn -w 1 -b 0.0.0.0:5000 app:app
-# CMD ["python", "app.py"]
+# exposing port 8000 on container
+EXPOSE 333
+
+# serving flask backend through uWSGI server
+
+CMD [ "python", "app.py" ]
