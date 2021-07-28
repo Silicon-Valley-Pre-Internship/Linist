@@ -12,6 +12,10 @@ from google.cloud import storage
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 upload_folder = './static/'
 
+def datetime():
+    import datetime
+    now = datetime.datetime.now()
+    return now.strftime('%Y%m%d%H%M%S')
 
 def upload_blob(source_file_name, blob_name):
     storage_client = storage.Client()
@@ -66,16 +70,17 @@ def img_trans():
     if request.method == 'POST':
         image_file = request.files['image']
         if image_file:
+            timedata = datetime()
             image_location = os.path.join(
                 upload_folder + secure_filename(image_file.filename))
             image_file.save(image_location)
-            upload_blob(image_location, 'image3.png')
+            upload_blob(image_location, timedata + 'image.png')
 
             back_removed = process.process(image_location)
             back_removed_name = 'back_removed_' + 'test.png'
             back_location = upload_folder + back_removed_name
             back_removed.save(back_location)
-            upload_blob(back_location, 'back_removed3.png')
+            upload_blob(back_location, timedata + 'back_removed.png')
 
             img = cv2.imread(back_location)
             gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -95,7 +100,7 @@ def img_trans():
             cv2.imwrite(linist_name, linist)
             linist = process.process(linist_name)
             linist.save(linist_name)
-            upload_blob(linist_name, 'linist3.png')
+            upload_blob(linist_name, timedata + 'linist.png')
 
             # linist_url = 'https://storage.googleapis.com/linist_1/' + 파일명 <- url 이런 식으로 형성됨.
             removeAllFile(upload_folder)
@@ -113,6 +118,7 @@ def img_trans():
 def background():
     if request.method == 'POST':
         if request.files.get('image') and request.files.get('backImage'):
+            timedata = datetime()
             image = request.files['image']
             backImage = request.files['backImage']
 
@@ -144,7 +150,7 @@ def background():
             image.putdata(finalData)
             image.save(upload_folder + 'final.png')
 
-            upload_blob(upload_folder + 'final.png', 'final.png')
+            upload_blob(upload_folder + 'final.png', timedata + 'final.png')
 
             removeAllFile(upload_folder)
 
