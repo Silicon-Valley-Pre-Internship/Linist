@@ -17,10 +17,10 @@ const Main = () => {
         cardStyle: { backgroundColor: theme.background },
       }}
     >
-      <Stack.Screen name="Welcome Linist" component={MainTab} />
-      <Stack.Screen name="Profile" component={Profile} />
-      <Stack.Screen name="MainScreen" component={MainScreen}/>
-      <Stack.Screen name="Test" component={Test} />
+      <Stack.Screen name='Welcome Linist' component={MainTab} />
+      <Stack.Screen name='Profile' component={Profile} />
+      <Stack.Screen name='MainScreen' component={MainScreen} />
+      <Stack.Screen name='Test' component={Test} />
     </Stack.Navigator>
   );
 };

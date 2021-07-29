@@ -17,10 +17,10 @@ export default class Test extends React.Component {
     return (
       <View style={styles.container}>
         <Image
-          source={{ uri: this.state.url }}
+          source={this.state.url ? { uri: this.state.url } : null}
           style={{ width: '100%', height: '94%' }}
         />
-        <Button
+        {/* <Button
           title='Model Translation'
           style={styles.text}
           onPress={() =>
@@ -29,7 +29,7 @@ export default class Test extends React.Component {
             })
           }
           color='#EF9DA9'
-        />
+        /> */}
       </View>
     );
   }

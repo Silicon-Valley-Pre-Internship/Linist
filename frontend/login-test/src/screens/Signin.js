@@ -64,6 +64,7 @@ const Signin = ({ navigation }) => {
         <ImageBackground
           style={{ width: '100%', height: '100%' }}
           source={require('../assets/login_bgr.png')}
+          resizeMode='stretch'
         >
           {/* <Text style={styles.text1}></Text>
           <Text style={styles.text1}></Text> */}

@@ -8,6 +8,7 @@ import {
   Button,
   Text,
   TouchableOpacity,
+  ImageBackground,
 } from 'react-native';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 import * as Permissions from 'expo-permissions';
@@ -81,11 +82,11 @@ class MainScreen extends React.Component {
         })
         .then((res) => {
           // console.log(res);
-          alert('Upload success!');
+          alert('Transform success!');
 
           // test용 - photo
           this.setState({ photo: res });
-          this.setState({ image: res });
+          this.setState({ image: res.data });
           console.log(res.data);
         })
 
@@ -102,20 +103,26 @@ class MainScreen extends React.Component {
     const { photo } = this.state;
     return (
       <Container>
-        <MaterialIcons name='add-a-photo' size={40} color='black' />
-        <Text style={styles.text1}></Text>
-        <Text style={styles.text1}>Upload</Text>
-        <Text style={styles.text1}>Your</Text>
-        <Text style={styles.text1}>Picture</Text>
-        <Text style={styles.text1}>Here</Text>
-        <Text style={styles.text1}></Text>
-        <Text style={styles.text2}>원하시는 사진을 업로드해주세요</Text>
-        <Text style={styles.text2}>라인드로잉으로 변환해드립니다</Text>
-        <Text style={styles.text2}>멋진작품을 만들어보세요</Text>
-        <Text style={styles.text1}></Text>
+        <ImageBackground
+          style={{ width: '100%', height: '100%' }}
+          source={require('../assets/login_bgr.png')}
+          resizeMode='stretch'
+        >
+          <Text style={styles.text1}></Text>
+          <MaterialIcons name='add-a-photo' size={40} color='black' />
+          <Text style={styles.text1}></Text>
+          <Text style={styles.text1}>Upload</Text>
+          <Text style={styles.text1}>Your</Text>
+          <Text style={styles.text1}>Picture</Text>
+          <Text style={styles.text1}>Here!</Text>
+          <Text style={styles.text1}></Text>
+          <Text style={styles.text2}>원하시는 사진을 업로드해주세요</Text>
+          <Text style={styles.text2}>라인드로잉으로 변환해드립니다</Text>
+          <Text style={styles.text2}>멋진작품을 만들어보세요</Text>
+          <Text style={styles.text1}></Text>
 
-        {/* test */}
-        {/* {photo && (
+          {/* test */}
+          {/* {photo && (
           <React.Fragment>
             <Image
               source={{ uri: photo.data }}
@@ -124,32 +131,32 @@ class MainScreen extends React.Component {
           </React.Fragment>
         )} */}
 
-        <TouchableHighlight onPress={this._pickImage} style={styles.button}>
-          <View style={styles.btnContainer}>
-            <Text style={styles.btnText}>Select Image</Text>
-          </View>
-        </TouchableHighlight>
+          <TouchableHighlight onPress={this._pickImage} style={styles.button}>
+            <View style={styles.btnContainer}>
+              <Text style={styles.btnText}>Select Image</Text>
+            </View>
+          </TouchableHighlight>
 
-        <Text style={styles.text1}></Text>
-        <TouchableHighlight onPress={this.post} style={styles.button}>
-          <View style={styles.btnContainer}>
-            <Text style={styles.btnText}>Upload to the server</Text>
-          </View>
-        </TouchableHighlight>
+          <Text style={styles.text1}></Text>
+          <TouchableHighlight onPress={this.post} style={styles.button}>
+            <View style={styles.btnContainer}>
+              <Text style={styles.btnText}>Transform!</Text>
+            </View>
+          </TouchableHighlight>
 
-        <Text style={styles.text1}></Text>
-        <TouchableHighlight
-          onPress={() =>
-            this.props.navigation.navigate('Test', {
-              url: this.state.image,
-            })
-          }
-          style={styles.button}
-        >
-          <View style={styles.btnContainer}>
-            <Text style={styles.btnText}>Navigate to next page</Text>
-          </View>
-        </TouchableHighlight>
+          <TouchableHighlight
+            onPress={() =>
+              this.props.navigation.navigate('Test', {
+                url: this.state.image,
+              })
+            }
+            style={styles.button}
+          >
+            <View style={styles.btnContainer2}>
+              <Text style={styles.btnText}>Navigate to next page</Text>
+            </View>
+          </TouchableHighlight>
+        </ImageBackground>
       </Container>
     );
   }
@@ -165,14 +172,23 @@ const styles = StyleSheet.create({
   text1: {
     textAlign: 'left',
     fontWeight: 'bold',
-    fontSize: 30,
+    fontSize: 35,
   },
   text2: {
     textAlign: 'left',
     fontSize: 15,
   },
   btnContainer: {
-    backgroundColor: '#000000',
+    backgroundColor: '#9C9393',
+    paddingHorizontal: 50,
+    paddingVertical: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 10,
+  },
+  btnContainer2: {
+    backgroundColor: '#FFFFFF',
     paddingHorizontal: 50,
     paddingVertical: 10,
     flexDirection: 'row',
