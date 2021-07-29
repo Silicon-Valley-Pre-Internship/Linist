@@ -41,7 +41,8 @@ Here's an example of the service.
 
 
 ### Application Architecture
-![아키텍쳐](https://user-images.githubusercontent.com/85851785/127557607-56e35ee4-ee26-4228-b877-79bb1412a539.jpg)
+![아키텍쳐](https://user-images.githubusercontent.com/85851785/127559906-e6c7551f-9a87-4a16-9abd-f041d3dcba0f.jpg)
+
 
 
 
