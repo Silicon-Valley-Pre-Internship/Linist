@@ -1,5 +1,15 @@
 import React from 'react';
-import { View, Button, Image, StyleSheet } from 'react-native';
+import styled from 'styled-components';
+import { View, Button, Image, StyleSheet, Text } from 'react-native';
+
+const Container = styled.View`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  background-color: ${({ theme }) => theme.background};
+  padding: 0 20px;
+`;
+
 export default class Test extends React.Component {
   constructor(props) {
     super(props);
@@ -15,12 +25,16 @@ export default class Test extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Image
-          source={this.state.url ? { uri: this.state.url } : null}
-          style={{ width: '100%', height: '94%' }}
-        />
-        {/* <Button
+      <Container>
+        <View style={styles.container}>
+          <Text style={styles.text1}>Transformed Image!</Text>
+          <Text style={styles.text1}></Text>
+
+          <Image
+            source={this.state.url ? { uri: this.state.url } : null}
+            style={{ width: '100%', height: '90%' }}
+          />
+          {/* <Button
           title='Model Translation'
           style={styles.text}
           onPress={() =>
@@ -30,7 +44,8 @@ export default class Test extends React.Component {
           }
           color='#EF9DA9'
         /> */}
-      </View>
+        </View>
+      </Container>
     );
   }
 }

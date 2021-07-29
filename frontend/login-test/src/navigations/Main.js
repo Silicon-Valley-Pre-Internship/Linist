@@ -20,7 +20,7 @@ const Main = () => {
       <Stack.Screen name='Welcome Linist' component={MainTab} />
       <Stack.Screen name='Profile' component={Profile} />
       <Stack.Screen name='MainScreen' component={MainScreen} />
-      <Stack.Screen name='Test' component={Test} />
+      <Stack.Screen name='Result Image Page' component={Test} />
     </Stack.Navigator>
   );
 };

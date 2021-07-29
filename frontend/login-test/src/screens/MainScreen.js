@@ -146,7 +146,7 @@ class MainScreen extends React.Component {
 
           <TouchableHighlight
             onPress={() =>
-              this.props.navigation.navigate('Test', {
+              this.props.navigation.navigate('Result Image Page', {
                 url: this.state.image,
               })
             }
@@ -179,7 +179,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   btnContainer: {
-    backgroundColor: '#9C9393',
+    backgroundColor: '#F6C1CE',
     paddingHorizontal: 50,
     paddingVertical: 10,
     flexDirection: 'row',

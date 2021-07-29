@@ -177,6 +177,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderRadius: 10,
     margin: 7,
+    marginBottom: 10,
+    marginTop: 10,
   },
   button: {
     borderRadius: 5,
