@@ -5,6 +5,7 @@
 If you give photos to the service, you can print new photos turned into line drawing. Also you can keep the converted images in the application and share it with friends allowed to approach. 
 
 Here's an example of the service.
+
 ![README SAMPLE](https://user-images.githubusercontent.com/85851785/127557048-9d886c08-8933-4fef-9cb4-a1408fd56286.jpg)
 
  
@@ -40,7 +41,7 @@ Here's an example of the service.
 
 
 ### Application Architecture
-![Architecture](https://user-images.githubusercontent.com/85851785/126907704-d746eaec-f982-47ac-8b33-80efea2e4209.png)
+![아키텍쳐](https://user-images.githubusercontent.com/85851785/127557607-56e35ee4-ee26-4228-b877-79bb1412a539.jpg)
 
 
  ## TEAM _ LINIST
