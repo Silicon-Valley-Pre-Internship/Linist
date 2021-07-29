@@ -74,7 +74,7 @@ class MainScreen extends React.Component {
 
       //Post 처리
       await axios
-        .post('http://10.200.15.194:333/img_trans', formData, {
+        .post('http://192.168.0.26:333/img_trans', formData, {
           headers: {
             enctype: 'multipart/form-data',
           },
