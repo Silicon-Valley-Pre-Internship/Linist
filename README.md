@@ -48,7 +48,7 @@ Here's an example of the service.
 [![데모영상](http://img.youtube.com/vi/zQdMHxLI2Ig/0.jpg)](https://youtu.be/zQdMHxLI2Ig) 
 
 ## 서비스 소개 자료
-
+[발표 자료](https://drive.google.com/file/d/1aSnyFdmMt6y4aTrh2-otTx0mlSH87sVF/view)
 
  ## TEAM _ LINIST
   
