@@ -10,12 +10,14 @@ import background_remove.process as process
 from google.cloud import storage
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
-upload_folder = './static/'
+upload_folder = '/usr/src/app/app/static/'
+
 
 def datetime():
     import datetime
     now = datetime.datetime.now()
     return now.strftime('%Y%m%d%H%M%S')
+
 
 def upload_blob(source_file_name, blob_name):
     storage_client = storage.Client()
